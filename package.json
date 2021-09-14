@@ -3,10 +3,17 @@
   "version": "1.0.0",
   "description": "TMS learning project",
   "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0"
+  },
   "scripts": {
-    "test": "test"
+    "start": "webpack serve --config webpack.dev.js --env DEBUG",
+    "build": "webpack --config webpack.dev.js",
+    "deploy": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
