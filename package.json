@@ -1,0 +1,25 @@
+{
+  "name": "fe12-react-kuntsevich-vitaly",
+  "version": "1.0.0",
+  "description": "TMS learning project",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvaker/FE12-React-Kuntsevich-Vitaly.git"
+  },
+  "keywords": [
+    "demo",
+    "learning"
+  ],
+  "author": "Vitaly Kuntsevich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kvaker/FE12-React-Kuntsevich-Vitaly/issues"
+  },
+  "homepage": "https://github.com/kvaker/FE12-React-Kuntsevich-Vitaly#readme"
+}
