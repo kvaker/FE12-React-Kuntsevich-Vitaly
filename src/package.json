@@ -12,10 +12,10 @@
     "webpack-cli": "^4.8.0"
   },
   "scripts": {
-    "build": "../node_modules/.bin/webpack",
-    "start": "../node_modules/.bin/webpack serve",
-    "watch": "../node_modules/.bin/webpack --watch",
-    "serve": "../node_modules/.bin/webpack serve"
+    "build": "webpack",
+    "start": "webpack serve",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
   },
   "repository": {
     "type": "git",

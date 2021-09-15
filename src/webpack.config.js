@@ -9,7 +9,7 @@ module.exports = {
         filename: '[name].[contenthash].js',
         clean: true,
     },
-    plugins: [new HtmlWebpackPlugin(options:{
+    plugins: [new HtmlWebpackPlugin({
         template:'./public/index.html',
         filename: './index.html',
 })],
@@ -32,6 +32,9 @@ module.exports = {
                 "sass-loader",
             ],
         },
-    ],
-},
+            {
+                test: /\.css$/,
+                loader: 'style!css'
+            }
+    ]
 }
