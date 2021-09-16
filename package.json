@@ -1,13 +1,16 @@
 {
   "name": "FE12-React-Kuntsevich-Vitaly",
   "version": "1.0.0",
-  "description": "",
+  "description": "TMS learning project",
   "main": "index.js",
   "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.2.1"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.14.5",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "sass": "^1.41.0",
@@ -15,16 +18,25 @@
     "style-loader": "^3.2.1",
     "webpack": "^5.52.1"
   },
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "start": "webpack serve",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kvaker/FE12-React-Kuntsevich-Vitaly.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "demo",
+    "learning"
+  ],
+  "author": "Vitaly Kuntsevich",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kvaker/FE12-React-Kuntsevich-Vitaly/issues"
   },
