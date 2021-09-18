@@ -1,7 +1,14 @@
-class Card {
-    constructor(taskName, isDone, rootElement) {
+class Card extends React.Component {
+    constructor(props) {
+        super(props);
     }
-    this Card = document.createElement("div");
-    this Card.innerText = `Tsk ${taskName}, is ${isDone ? "done" : "note done"}`
-    rootElement.appendChild(this.Card);
+
+    render() {
+        return (
+            <div>
+                {`Tsk ${this.props.taskName}, is ${this.props.isDone ? "done" : "note done"}`}
+            </div>
+        )
     }
+}
+export default Card
