@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import Card from "../../modules/Card"
 import '../styles/style.css';
 

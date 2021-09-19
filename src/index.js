@@ -1,4 +1,4 @@
-import React from "React";
+import React from "react";
 import ReactDOM from "react-dom";
 import CardHolder from "../src/Components/CardHolder/CardHolder";
 import './Components/styles/style.css'
