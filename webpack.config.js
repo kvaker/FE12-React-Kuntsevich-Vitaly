@@ -10,6 +10,7 @@ module.exports = {
         filename: '[name].js',
         clean: true,
     },
+
     devServer: {
         port: 3000,
         hot: true,
