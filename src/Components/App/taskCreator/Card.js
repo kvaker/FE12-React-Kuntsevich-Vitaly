@@ -15,7 +15,7 @@ class Card extends React.PureComponent {
                             <button className="button-version" onClick={this.props.changeName(this.props.index)}>change name</button>
                             <button className="button-version" onClick={this.props.changeName(this.props.index)}>up</button>
                             <button className="button-version" onClick={this.props.changeName(this.props.index)}>down</button>
-                            <button className="button-version" onClick={() => this.props.removeItem(index)}>Remove</button>
+                            <button className="button-version" onClick={() => this.props.deleteCard(this.props.index)}>Delete</button>
                         </div>
                     </li>
 

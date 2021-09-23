@@ -23,11 +23,10 @@ class CardHolder extends Component {
         newTaskList.push({taskName: `task ${this.state.taskList.length}`, isDone: false});
         this.setState({taskList: newTaskList});
     }
-    remove(removeIndex) {
-        this.setState((state) => ({
-            ...state,
-            items: this.state.items.filter((item, index) => index !== removeIndex)
-        }))
+    deleteCard = (index) => {
+        let newTaskList = [...this.state.taskList];
+        let postDeleteTaskList = newTaskList.splice(index, index + 1);
+        this.setState({taskList: postDeleteTaskList});
     }
     changeName = (index) => () => {
         let newTaskList = [...this.state.taskList];
@@ -44,7 +43,7 @@ class CardHolder extends Component {
                 {this.state.taskList.map((task, index) => {
                     return (
                         <div key={task.taskName}>
-                        <Card taskName={task.taskName} isDone={task.isDone} index={index} changeName={this.changeName}/>
+                        <Card taskName={task.taskName} isDone={task.isDone} index={index} changeName={this.changeName} deleteCard={this.deleteCard}/>
                         </div>
                 )
                 })}
