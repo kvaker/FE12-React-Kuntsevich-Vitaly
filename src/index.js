@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CardHolder from "./Components/App/CardHolder/CardHolder";
-import './Components/styles/style.css'
-export const CONSTANTS = {
-   DELETE_CARD: "DELETE_CARD"
-};
+import './styles/style.css'
+import App from "./App";
 
-ReactDOM.render(<CardHolder/>, document.getElementById("root"));
+
+ReactDOM.render(<App/>, document.getElementById("root"));
