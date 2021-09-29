@@ -1,10 +1,13 @@
-import React, {useEffect, useCallback, useState} from "react";
+import React, {useEffect, useContext, useCallback, useState} from "react";
 import Card from "../taskCreator/Card"
 import 'styles/style.css';
-import ModalWindow from "Components/CardHolder/ModalWindow";
+import { ModalContext } from "HOC/GlobalModalProvider";
+import { Link } from "react-router-dom";
 
 const CardHolder = (props) => {
     const [taskList, setTaskList] = useState([]);
+    const [newTaskName, setNewTaskName] = useState('');
+    const setModalContext = useContext(ModalContext);
 
     useEffect(() => {
             new Promise((resolve, reject) => {
@@ -21,17 +24,17 @@ const CardHolder = (props) => {
         setTaskList(newTaskList);
     }
 
-    const deleteCard = useCallback( (index) => () => {
+    const deleteCard = (index) => {
         let newTaskList = [...taskList];
         newTaskList.splice(index, index + 1);
         setTaskList(newTaskList);
-    }, []);
+    }
 
    const changeName = useCallback((index) => () => {
         let newTaskList = [...taskList];
         newTaskList[index].taskName = "New";
        setTaskList(newTaskList);
-   }, []);
+   }, [taskList]);
 
     return (
         <section className='section-board'>
@@ -41,12 +44,12 @@ const CardHolder = (props) => {
                         {taskList.map((task, index) => {
                             return (
                                 <div key={task.taskName}>
-                                    <Card setIsModalOpen={props.setIsModalOpen} taskName={task.taskName} isDone={task.isDone} index={index} changeName={changeName} deleteCard={deleteCard}/>
+                                    <Card setIsModalOpen={setModalContext} taskName={task.taskName} isDone={task.isDone} index={index} changeName={changeName} deleteCard={deleteCard}/>
                                 </div>
                             )
                         })}
                         <button className={"board-card_addNewCard newtask-link"} onClick={addTask}>add task</button>
-                        <button className={"board-card_addNewCard newtask-link"} onClick={() => {props.setIsModalOpen(
+                        <button className={"board-card_addNewCard newtask-link"} onClick={() => {setModalContext(
                             <button className={"board-card_addNewCard newtask-link"} onClick={addTask}>add task</button>
                         )}}>open modal</button>
                     </div>

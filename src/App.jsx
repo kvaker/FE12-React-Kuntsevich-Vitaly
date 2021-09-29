@@ -1,15 +1,19 @@
 import React from "react";
+import { BrowserRouter } from 'react-router-dom'
 import CardHolder from "./Components/CardHolder/CardHolder";
-import GlobalModalProvider from "./GlobalModalProvider";
+import GlobalModalProvider from "./HOC/GlobalModalProvider";
+import RoutRouter from "./Routing/Rout";
+import MainLayout from "./Layouts/MainLayout";
 
 const App = (props) => {
     return (
         <React.Fragment>
-            <GlobalModalProvider renderProps={(setIsModalOpen) => {
-                return(
-                        <CardHolder setIsModalOpen={setIsModalOpen}/>
-                    )
-                }}>
+            <GlobalModalProvider>
+                <BrowserRouter>
+                    <MainLayout>
+                <RoutRouter/>
+                    </MainLayout>
+                </BrowserRouter>
             </GlobalModalProvider>
         </React.Fragment>
     )
