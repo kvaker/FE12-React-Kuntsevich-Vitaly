@@ -1,0 +1,1 @@
+export const getCardDetailsRoute = (taskID) => `/card/${taskID}`

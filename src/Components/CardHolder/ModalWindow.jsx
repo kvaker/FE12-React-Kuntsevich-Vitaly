@@ -1,10 +1,11 @@
 import React, {useEffect, memo, useRef} from "react";
+import styled from 'styled-components';
 
 const ModalWindow = (props) => {
     return (
-        <div className={"modal"}>
+        <div className={"Card modal"}>
             {props.children}
-            </div>
+                   </div>
     )
 }
 

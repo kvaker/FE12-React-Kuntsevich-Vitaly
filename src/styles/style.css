@@ -406,16 +406,14 @@ table {
 
 
 .modal {
-    min-width: 300px;
-    min-height: 300px;
-    display: flex;
-    align-content: center;
-    align-items: center;
     position: absolute;
-    top: 15%;
-    left: 15%;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
     z-index: 1000;
-    background-color: #B8EBB0;
+    transition: top 0.4s, opacity 0.4s;
 }
 
 .container-wrap-board{
