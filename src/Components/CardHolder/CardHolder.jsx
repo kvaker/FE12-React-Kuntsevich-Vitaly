@@ -158,7 +158,7 @@ const CardHolder = (props) => {
 
     const deleteCard = (index) => {
         let newTaskList = [...taskList];
-        newTaskList.splice(index, index + 1);
+        newTaskList.splice(index, 1);
         setTaskList(newTaskList);
     }
 
@@ -177,7 +177,7 @@ const CardHolder = (props) => {
 
     return (
         <StyledCardHolder>
-            <CardColumn title={"Todo"}>
+            <CardColumn title={"Todo"} addTask={addTask}>
                   {taskList.map((task, index) => {
                     if (task.state === TASK_STATUS.toDo) {
                         return (
@@ -190,7 +190,7 @@ const CardHolder = (props) => {
                     }
                 })}
                </CardColumn>
-            <CardColumn title={"InProgress"}>
+            <CardColumn title={"InProgress"} addTask={addTask}>
                 {taskList.map((task, index) => {
                     if (task.state === TASK_STATUS.progress) {
                         return (
@@ -203,7 +203,7 @@ const CardHolder = (props) => {
                     }
                 })}
             </CardColumn>
-            <CardColumn title={"Done"}>
+            <CardColumn title={"Done"} addTask={addTask}>
                 {taskList.map((task, index) => {
                     if (task.state === TASK_STATUS.done) {
                         return (

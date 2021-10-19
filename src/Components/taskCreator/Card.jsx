@@ -225,10 +225,14 @@ const Card = (props) => {
                     <div className="card-navi">
                         <button className="card-subtitle_status">Low</button>
                         {props.children}
-                        <button
-                            onClick={() => {
-                                setModalContent("Card modal");
-                            }} className="board-card_editCard newtask-link">
+                        <button className={"board-card_editCard"}
+                        onClick={() => {props.setIsModalOpen(
+                            <React.Fragment>
+                                <EditCard setIsModalOpen={props.setIsModalOpen}>
+
+                                </EditCard>
+                            </React.Fragment>
+                        )}}>
                             <img src={img} alt='editModal' className={"board-card_editCard"}/>
                         </button>
                         </div>
@@ -244,25 +248,12 @@ const Card = (props) => {
                         </div>
                     </div>
                     <div className="button-version">
-                        <button className={"board-card_editCard"} onClick={() => {props.setIsModalOpen("Card modal") }}></button>
                         <button className={"button-version"} onClick={props.changeName(props.index)}>change name</button>
                         <button className={"button-version"} onClick={props.changeName(props.index)}>up</button>
                         <button className={"button-version"} onClick={props.changeName(props.index)}>down</button>
                         <button className={"button-version"} onClick={() => props.deleteCard(props.index)}>Delete</button>
                         {props.children}
-                        <button className={"button-version"} onClick={() => {props.setIsModalOpen(
-                            <React.Fragment>
-                                <EditCard>
-
-                                </EditCard>
-                            </React.Fragment>
-                        )}}>
-                            open modal
-                        </button>
-                        <button className={"button-version"} onClick={() => {props.setIsModalOpen(false)}}>
-                            close modal
-                        </button>
-                    </div>
+                                           </div>
                     </div>
             </div>
          </StyledCard>
