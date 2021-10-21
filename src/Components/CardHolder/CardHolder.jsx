@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { TASK_STATUS } from "../../Constants/tasksStatus";
 import styled from "styled-components";
 import CardColumn from "./CardColumn";
+import { cardListSelector } from "../../Store/selectors/cardsList";
+import { useDispatch, useSelector } from "react-redux";
+import { changeName, newCard } from "../../Store/actions/cardsList";
 
 const StyledCardHolder = styled.div`
 display: flex;
@@ -132,26 +135,29 @@ align-items: flex-start;
 `
 
 const CardHolder = (props) => {
-    const [taskList, setTaskList] = useState([]);
+    const taskList = useSelector(cardListSelector);
+    const dispatch = useDispatch();
     const [newTaskName, setNewTaskName] = useState('');
     const [newTaskDescription, setNewTaskDescription] = useState('');
     const setModalContext = useContext(ModalContext);
 
     useEffect(() => {
-            new Promise((resolve, reject) => {
-            resolve([{taskName: "task 0", isDone: false, taskDescription: "Task 1 description", state: TASK_STATUS.toDo},
-                {taskName: "task 1", isDone: false, taskDescription: "Task 2 description", state: TASK_STATUS.progress},
-                {taskName: "task 2", isDone: false, taskDescription: "Task 2 description", state: TASK_STATUS.done}])
+        console.log('use effect');
+        new Promise((resolve, reject) => {
+            resolve([
+                { taskName: 'task 1', taskDescription: 'Define more tags in components.', isDone: false, userName: 'Jon', state: TASK_STATUS.pending },
+                { taskName: 'task 2', taskDescription: 'Add more user avatars.', isDone: true, userName: 'Jack', state: TASK_STATUS.progress },
+                { taskName: "Task 3", isDone: true, taskDescription: "Task 3 description", state: TASK_STATUS.done },
+            ]);
         }).then((data) => {
-                setTaskList(data)
-
-        }).catch()
+        });
+        return () => {
+            console.log('bue');
+        };
     }, []);
 
-    const addTask = (state) => {
-        let newTaskList = [...taskList];
-        newTaskList.push({taskName: newTaskName, isDone: false, taskDescription: newTaskDescription, state: state});
-        setTaskList(newTaskList);
+    const addTask = (newTaskName, newTaskDescription, newTaskUser, state) => {
+        dispatch(newCard(newTaskName, newTaskDescription, newTaskUser, state));
         setNewTaskName('');
         setNewTaskDescription('');
     }
@@ -183,6 +189,9 @@ const CardHolder = (props) => {
                         return (
                             <div key={task.taskName}>
                                 <Card setIsModalOpen={setModalContext} taskName={task.taskName}
+                                      taskDescription={task.taskDescription}
+                                      userName={task.userName}
+                                      state={task.state}
                                       isDone={task.isDone} index={index} changeName={changeName}
                                       addTask={addTask} deleteCard={deleteCard}/>
                             </div>
@@ -196,6 +205,9 @@ const CardHolder = (props) => {
                         return (
                             <div key={task.taskName}>
                                 <Card setIsModalOpen={setModalContext} taskName={task.taskName}
+                                      taskDescription={task.taskDescription}
+                                      userName={task.userName}
+                                      state={task.state}
                                       isDone={task.isDone} index={index} changeName={changeName}
                                       addTask={addTask} deleteCard={deleteCard}/>
                             </div>
@@ -209,6 +221,9 @@ const CardHolder = (props) => {
                         return (
                             <div key={task.taskName}>
                                 <Card setIsModalOpen={setModalContext} taskName={task.taskName}
+                                      taskDescription={task.taskDescription}
+                                      userName={task.userName}
+                                      state={task.state}
                                       isDone={task.isDone} index={index} changeName={changeName}
                                       addTask={addTask} deleteCard={deleteCard}/>
                             </div>

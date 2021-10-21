@@ -37,12 +37,14 @@ const EditCardModal = (props) => {
                       <button className={"newtask-close"} onClick={() => {props.setIsModalOpen(false)}}>x</button>
                         <strong>New Task</strong>
                         <div className="form-row">
-                            <label className="form-row-label" >Task</label>
+                            <label className="form-row-label">Task</label>
                             <input className="form-row-input" type="text" name="task-name" id="task-name"></input>
                             <div className="form-row">
                                 <label className="form-row-label">Description</label>
-                                <textarea className="form-row-input" name="task-description" id="task-description" cols="70" rows="10"></textarea>
-                                <button className="newtask-save" id="newtask-save_data">Сохранить</button>
+                                <textarea className="form-row-input" name="task-description" id="task-description"
+                                          cols="70" rows="10"></textarea>
+                                <button className="newtask-save" onClick={() =>
+                                {props.addTask()}}>Сохранить</button>
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import { ModalContext} from "../../HOC/GlobalModalProvider";
 import { getCardDetailsRoute } from "Routing/routes";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import img from '/src/Assets/img/pen-solid.svg';
+import PenEditCard from '/src/Assets/img/pen-solid.svg';
 import img2 from '/src/Assets/img/User 01.png';
 import EditCard from "../ModalContent/EditCard";
 
@@ -187,8 +187,8 @@ const StyledCard = styled.div`
     margin-bottom: 16px;
 }
 .board-card_editCard {
-    font-size: 12px;
-    font-weight: 600;
+    width: 17px;
+    weight: 17px;
     text-align: center;
     background: none;
     color: #221C1D;
@@ -225,16 +225,15 @@ const Card = (props) => {
                     <div className="card-navi">
                         <button className="card-subtitle_status">Low</button>
                         {props.children}
-                        <button className={"board-card_editCard"}
-                        onClick={() => {props.setIsModalOpen(
+                        <div onClick={() => {props.setIsModalOpen(
                             <React.Fragment>
                                 <EditCard setIsModalOpen={props.setIsModalOpen}>
 
                                 </EditCard>
                             </React.Fragment>
                         )}}>
-                            <img src={img} alt='editModal' className={"board-card_editCard"}/>
-                        </button>
+                            <PenEditCard className={"board-card_editCard"}/>
+                        </div>
                         </div>
                     <p className="card-text">{props.taskName}</p>
                     <div className="button-version">

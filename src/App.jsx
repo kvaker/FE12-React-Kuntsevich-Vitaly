@@ -4,17 +4,22 @@ import CardHolder from "./Components/CardHolder/CardHolder";
 import GlobalModalProvider from "./HOC/GlobalModalProvider";
 import RoutRouter from "./Routing/Rout";
 import MainLayout from "./Layouts/MainLayout";
+import GlobalStoreProvider from "./HOC/GlobalStoreProvider";
 
 const App = (props) => {
     return (
         <React.Fragment>
-            <GlobalModalProvider>
-                <BrowserRouter>
-                    <MainLayout>
-                <RoutRouter/>
-                    </MainLayout>
-                </BrowserRouter>
-            </GlobalModalProvider>
+            <BrowserRouter>
+                <GlobalStoreProvider>
+                    <GlobalModalProvider>
+                        <BrowserRouter>
+                            <MainLayout>
+                                <RoutRouter/>
+                            </MainLayout>
+                        </BrowserRouter>
+                    </GlobalModalProvider>
+                 </GlobalStoreProvider>
+            </BrowserRouter>
         </React.Fragment>
     )
 }
