@@ -4,10 +4,11 @@ import { ModalContext } from "HOC/GlobalModalProvider";
 import { Link } from "react-router-dom";
 import { TASK_STATUS } from "../../Constants/tasksStatus";
 import styled from "styled-components";
-import CardColumn from "./CardColumn";
+import CardColumn from "/src/Components/CardHolder/CardColumn";
 import { cardListSelector } from "../../Store/selectors/cardsList";
 import { useDispatch, useSelector } from "react-redux";
-import { changeName, newCard } from "../../Store/actions/cardsList";
+import { newCard, toTopCard, toBottomCard, deleteCard, doneCard, changeCard } from "../../Store/actions/cardsList";
+import {CARD_LIST_ACTIONS} from "../../Store/actionTypes";
 
 const StyledCardHolder = styled.div`
 display: flex;
@@ -139,14 +140,14 @@ const CardHolder = (props) => {
     const dispatch = useDispatch();
     const [newTaskName, setNewTaskName] = useState('');
     const [newTaskDescription, setNewTaskDescription] = useState('');
-    const setModalContext = useContext(ModalContext);
+    const setModalContent = useContext(ModalContext);
 
     useEffect(() => {
         console.log('use effect');
         new Promise((resolve, reject) => {
             resolve([
-                { taskName: 'task 1', taskDescription: 'Define more tags in components.', isDone: false, userName: 'Jon', state: TASK_STATUS.pending },
-                { taskName: 'task 2', taskDescription: 'Add more user avatars.', isDone: true, userName: 'Jack', state: TASK_STATUS.progress },
+                { taskName: 'task 1', taskDescription: 'Define more tags in components.', isDone: false, TaskUser: 'Jon', state: TASK_STATUS.toDo },
+                { taskName: 'task 2', taskDescription: 'Add more user avatars.', isDone: true, TaskUser: 'Jack', state: TASK_STATUS.progress },
                 { taskName: "Task 3", isDone: true, taskDescription: "Task 3 description", state: TASK_STATUS.done },
             ]);
         }).then((data) => {
@@ -156,79 +157,92 @@ const CardHolder = (props) => {
         };
     }, []);
 
-    const addTask = (newTaskName, newTaskDescription, newTaskUser, state) => {
+    const addTask = (newTaskName, newTaskDescription, newTaskUser, state, index) => {
         dispatch(newCard(newTaskName, newTaskDescription, newTaskUser, state));
         setNewTaskName('');
         setNewTaskDescription('');
     }
 
-    const deleteCard = (index) => {
-        let newTaskList = [...taskList];
-        newTaskList.splice(index, 1);
-        setTaskList(newTaskList);
-    }
+    const changeTask = (index, taskName, taskDescription) => {
+        dispatch(changeCard(index, taskName, taskDescription));
+    };
 
-   const changeName = useCallback((index) => () => {
-        let newTaskList = [...taskList];
-        newTaskList[index].taskName = "New";
-       setTaskList(newTaskList);
-   }, [taskList]);
+    const toTop = (index) => () => {
+        dispatch(toTopCard(index));
+    };
 
-    const taskDone = (index) => {
-        let newTaskList = [...taskList];
-        newTaskList[index].isDone = true;
-        newTaskList[index].state = TASK_STATUS.done;
-        setTaskList(newTaskList);
-       };
+    const toBottom = (index) => () => {
+        dispatch(toBottomCard(index));
+    };
+
+    const deleteTask = (index) => () => {
+        dispatch(deleteCard(index));
+    };
+
+    const taskDone = (index) => () => {
+        dispatch(doneCard(index));
+    };
 
     return (
         <StyledCardHolder>
-            <CardColumn title={"Todo"} addTask={addTask}>
-                  {taskList.map((task, index) => {
+            <CardColumn title="To Do"
+                        addTask={addTask}
+                        taskStatus={TASK_STATUS.toDo}
+            >
+                {taskList.map((task, index) => {
                     if (task.state === TASK_STATUS.toDo) {
                         return (
-                            <div key={task.taskName}>
-                                <Card setIsModalOpen={setModalContext} taskName={task.taskName}
-                                      taskDescription={task.taskDescription}
-                                      userName={task.userName}
-                                      state={task.state}
-                                      isDone={task.isDone} index={index} changeName={changeName}
-                                      addTask={addTask} deleteCard={deleteCard}/>
-                            </div>
-                        )
+                            <Card
+                                key={task.taskName}
+                                taskName={task.taskName}
+                                isDone={task.isDone}
+                                index={index}
+                                taskDescription={task.taskDescription}
+                                state={task.state}
+                            />
+                        );
                     }
+                    return false;
                 })}
                </CardColumn>
-            <CardColumn title={"InProgress"} addTask={addTask}>
+            <CardColumn  title="In Progress"
+                         addTask={addTask}
+                         taskStatus={TASK_STATUS.progress}
+            >
                 {taskList.map((task, index) => {
                     if (task.state === TASK_STATUS.progress) {
                         return (
-                            <div key={task.taskName}>
-                                <Card setIsModalOpen={setModalContext} taskName={task.taskName}
-                                      taskDescription={task.taskDescription}
-                                      userName={task.userName}
-                                      state={task.state}
-                                      isDone={task.isDone} index={index} changeName={changeName}
-                                      addTask={addTask} deleteCard={deleteCard}/>
-                            </div>
-                        )
+                            <Card
+                                key={task.taskName}
+                                taskName={task.taskName}
+                                isDone={task.isDone}
+                                index={index}
+                                taskDescription={task.taskDescription}
+                                state={task.state}
+                            />
+                        );
                     }
+                    return false;
                 })}
             </CardColumn>
-            <CardColumn title={"Done"} addTask={addTask}>
+            <CardColumn title="Done"
+                        addTask={addTask}
+                        taskStatus={TASK_STATUS.done}
+            >
                 {taskList.map((task, index) => {
                     if (task.state === TASK_STATUS.done) {
                         return (
-                            <div key={task.taskName}>
-                                <Card setIsModalOpen={setModalContext} taskName={task.taskName}
-                                      taskDescription={task.taskDescription}
-                                      userName={task.userName}
-                                      state={task.state}
-                                      isDone={task.isDone} index={index} changeName={changeName}
-                                      addTask={addTask} deleteCard={deleteCard}/>
-                            </div>
-                        )
+                            <Card
+                                key={task.taskName}
+                                taskName={task.taskName}
+                                isDone={task.isDone}
+                                index={index}
+                                taskDescription={task.taskDescription}
+                                state={task.state}
+                            />
+                        );
                     }
+                    return false;
                 })}
             </CardColumn>
                           </StyledCardHolder>

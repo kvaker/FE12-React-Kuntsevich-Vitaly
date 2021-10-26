@@ -1,6 +1,8 @@
-import React, {useEffect, memo, useContext, useRef} from "react";
+import React, {useEffect, memo, useContext, useRef, useState} from "react";
 import styled from 'styled-components';
 import { ModalContext } from "../../HOC/GlobalModalProvider";
+import { changeCard } from '/src/Store/actions/cardsList';
+import {useDispatch} from "react-redux";
 
 const StyledEditCardModal = styled.div`
         .newtask-open {
@@ -17,6 +19,10 @@ const StyledEditCardModal = styled.div`
         }
         
         .newtask-content {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
           background-color: rgb(211, 208, 208);
           color: #221c1d;
           max-width: 30,5%;
@@ -28,28 +34,47 @@ const StyledEditCardModal = styled.div`
 
 const EditCardModal = (props) => {
     const setModalContent = useContext(ModalContext);
+    const [newTaskName, setNewTaskName] = useState('');
+    const [newTaskDescription, setNewTaskDescription] = useState('');
+    const dispatch = useDispatch();
+    const { currentTaskName, currentTaskDescription, currentIndex } = props;
     return (
         <React.Fragment>
         <div className={"Card modal"}>
-            {props.children}
-                         <div className="newtask-body">
+                                    <div className="newtask-body">
                     <div className="newtask-content">
-                      <button className={"newtask-close"} onClick={() => {props.setIsModalOpen(false)}}>x</button>
+                      <button className={"newtask-close"} onClick={() => {setModalContent(false)}}>x</button>
                         <strong>New Task</strong>
-                        <div className="form-row">
+                         <div className="form-row">
                             <label className="form-row-label">Task</label>
-                            <input className="form-row-input" type="text" name="task-name" id="task-name"></input>
+                            <textarea className="form-row-input" type="text" name="task-name" id="task-name"
+                                      defaultValue={currentTaskName}
+                                      onChange={(event) => { setNewTaskName(event.target.value); }}/>
                             <div className="form-row">
                                 <label className="form-row-label">Description</label>
                                 <textarea className="form-row-input" name="task-description" id="task-description"
-                                          cols="70" rows="10"></textarea>
-                                <button className="newtask-save" onClick={() =>
-                                {props.addTask()}}>Сохранить</button>
+                                          cols="70" rows="10" defaultValue={currentTaskDescription}
+                                          onChange={(event) => { setNewTaskDescription(event.target.value); }}/>
+                                <button className="newtask-save" onClick={() => {
+                                    if (newTaskName === '' && newTaskDescription === '') {
+                                    } else if (newTaskName !== '' && newTaskDescription !== '') {
+                                        dispatch(changeCard(currentIndex, newTaskName, newTaskDescription));
+                                    } else if (newTaskDescription === '') {
+                                        dispatch(changeCard(currentIndex, newTaskName, currentTaskDescription));
+                                    } else {
+                                        dispatch(changeCard(currentIndex, currentTaskName, newTaskDescription));
+                                    }
+                                    setModalContent(false);
+                                }}>
+                                    Save changes</button>
+                                <button className="newtask-save" onClick={() => {
+                                        setModalContent(false);
+                                    }}> Cancel</button>
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
-            </div>
              </React.Fragment>
     )
 }

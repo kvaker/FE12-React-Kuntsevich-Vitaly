@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import PenEditCard from '/src/Assets/img/pen-solid.svg';
 import img2 from '/src/Assets/img/User 01.png';
 import EditCard from "../ModalContent/EditCard";
+import { useDispatch } from "react-redux";
+import { toTopCard, toBottomCard, deleteCard, doneCard } from "/src/Store/actions/cardsList"
 
 const StyledCard = styled.div`
 .card-title{
@@ -97,6 +99,11 @@ const StyledCard = styled.div`
     margin-bottom: 8px;
     padding: 4px 8px;
 }
+.card-personal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .button-version{
     display: flex;
     flex-direction: row;
@@ -171,7 +178,7 @@ const StyledCard = styled.div`
 }
 .card-subtitle:hover {
     text-align: left;
-    background:#fbfff9;
+    background:#d5e4fc;
     color: #000000;
     position: relative;
     font-weight: 700;
@@ -191,7 +198,7 @@ const StyledCard = styled.div`
     weight: 17px;
     text-align: center;
     background: none;
-    color: #221C1D;
+    color: #8b8b8b;
     border: 0em;
     border-radius: 10px;
     margin-bottom: 8px;
@@ -209,6 +216,10 @@ const StyledCard = styled.div`
 
 const Card = (props) => {
     const setModalContent = useContext(ModalContext);
+    const dispatch = useDispatch();
+    const {
+        children, changeTask, taskName, isDone, index, taskDescription, state,
+    } = props;
 
    useEffect( () => {
     return () => {
@@ -225,32 +236,42 @@ const Card = (props) => {
                     <div className="card-navi">
                         <button className="card-subtitle_status">Low</button>
                         {props.children}
-                        <div onClick={() => {props.setIsModalOpen(
-                            <React.Fragment>
-                                <EditCard setIsModalOpen={props.setIsModalOpen}>
-
-                                </EditCard>
-                            </React.Fragment>
-                        )}}>
+                        <div onClick={() => { setModalContent(
+                            <EditCard
+                                currentTaskName={taskName}
+                                currentTaskDescription={taskDescription}
+                                currentIndex={index}
+                                changeName={changeTask}
+                            />,
+                        );
+                        }}
+                             className="edit-btn"
+                        >
                             <PenEditCard className={"board-card_editCard"}/>
                         </div>
                         </div>
                     <p className="card-text">{props.taskName}</p>
-                    <div className="button-version">
+                      <p className="card-text">{props.taskDescription}</p>
+                    <div className={"card-personal"}>
+                      <div className="button-version">
                         <button className="card-subtitle_version1">Mobile</button>
                         <button className="card-subtitle_version2">Web</button>
-                    </div>
+                      </div>
                     <span
                         className="subtitle-date">{props.taskName.finishDate === 0 ? '' : props.taskName.finishDate}</span>
                     <div className="icon-container">
                         <div className="customers-icon"><img className="customers-content_icon" src={img2} alt="Jorge C"/>
                         </div>
+                        </div>
                     </div>
                     <div className="button-version">
-                        <button className={"button-version"} onClick={props.changeName(props.index)}>change name</button>
-                        <button className={"button-version"} onClick={props.changeName(props.index)}>up</button>
-                        <button className={"button-version"} onClick={props.changeName(props.index)}>down</button>
-                        <button className={"button-version"} onClick={() => props.deleteCard(props.index)}>Delete</button>
+                        <button className={"button-version"} onClick={() => { dispatch(toTopCard(index));}}>Up</button>
+                        <button className={"button-version"} onClick={() => { dispatch(toBottomCard(index)); }}
+                        >Down</button>
+                        <button className={"button-version"} onClick={() => { dispatch(deleteCard(index)); }}
+                        >Delete</button>
+                        <button className={"button-version"} onClick={() => { dispatch(doneCard(index)); }}
+                        >To Done</button>
                         {props.children}
                                            </div>
                     </div>

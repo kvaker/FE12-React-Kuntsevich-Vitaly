@@ -2,7 +2,7 @@ import React, {useEffect, useContext, useCallback, useState} from "react";
 import CardHolder from "./CardHolder";
 import Card from "../taskCreator/Card";
 import styled from "styled-components";
-import {TASK_STATUS} from "../../Constants/tasksStatus";
+import { TASK_STATUS } from "/src/Constants/tasksStatus";
 
 
 const StyledCardColumn = styled.div`
@@ -34,6 +34,9 @@ const StyledCardColumn = styled.div`
 const CardColumn = (props) => {
     const [newTaskName, setNewTaskName] = useState('');
     const [newTaskDescription, setNewTaskDescription] = useState('');
+    const {
+        title, children, taskStatus, addTask,
+    } = props;
 
     return (
         <StyledCardColumn>
@@ -49,11 +52,33 @@ const CardColumn = (props) => {
                             </div>
             </div>
             {props.children}
-            <div className={"card"}>
-                <input onChange={(event) =>
-                {setNewTaskName(event.target.value)}} value={newTaskName} className={'usercard-title'} placeholder={'Your task name'}/>
-                <button className={"add-btn"} onClick={() => props.addTask(TASK_STATUS.toDo)}>Add new Task</button>
-                  </div>
+                        {taskStatus !== TASK_STATUS.done && (
+                        <div className="card">
+                            <input
+                                onChange={(event) => { setNewTaskName(event.target.value); }}
+                                value={newTaskName}
+                                className="usercard-title"
+                                placeholder="Your task name"
+                            />
+                            <input
+                                onChange={(event) => { setNewTaskDescription(event.target.value); }}
+                                value={newTaskDescription}
+                                className="usercard-description"
+                                placeholder="Your task description"
+                            />
+                            <button
+                                type="button"
+                                className="button-version"
+                                onClick={() => {
+                                    addTask(newTaskName, newTaskDescription, props.taskStatus);
+                                    setNewTaskName('');
+                                    setNewTaskDescription('');
+                                }}
+                            >
+                                Add new Task
+                            </button>
+                        </div>
+                        )}
                 </div>
                 </div>
 
