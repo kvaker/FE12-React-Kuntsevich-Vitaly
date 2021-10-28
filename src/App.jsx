@@ -5,6 +5,7 @@ import GlobalModalProvider from "./HOC/GlobalModalProvider";
 import RoutRouter from "./Routing/Rout";
 import MainLayout from "./Layouts/MainLayout";
 import GlobalStoreProvider from "./HOC/GlobalStoreProvider";
+import './styles/style.css'
 
 const App = (props) => {
     return (

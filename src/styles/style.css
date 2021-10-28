@@ -1,3 +1,7 @@
+/*@import './src/Assets/fonts/Montserrat-Regular.ttf';*/
+/*@import './src/Assets/fonts/Montserrat-Medium.ttf';*/
+/*@import './src/Assets/fonts/Montserrat-SemiBold.ttf';*/
+/*@import './src/Assets/fonts/Montserrat-Thin.ttf';*/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -404,6 +408,33 @@ table {
     border-spacing: 0;
 }
 
+/*@font-face {*/
+/*    font-family: 'Montserrat-Regular';*/
+/*    font-style: normal;*/
+/*    font-weight: normal;*/
+/*    src: local('Montserrat-Regular'), url(./src/Assets/fonts/Montserrat-Regular.ttf) format('truetype');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'Montserrat-SemiBold';*/
+/*    font-style: normal;*/
+/*    font-weight: normal;*/
+/*    src: local('Montserrat-SemiBold'), url(./src/Assets/fonts/Montserrat-SemiBold.ttf) format('truetype');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'Montserrat-Thin';*/
+/*    font-style: normal;*/
+/*    font-weight: normal;*/
+/*    src: local('Montserrat-Thin'), url(./src/Assets/fonts/Montserrat-Thin.ttf) format('truetype');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'Montserrat-Medium';*/
+/*    font-style: normal;*/
+/*    font-weight: normal;*/
+/*    src: local('Montserrat-Medium'), url(./src/Assets/fonts/Montserrat-Medium.ttf) format('truetype');*/
+/*}*/
 
 .modal {
     position: absolute;

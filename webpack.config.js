@@ -51,6 +51,20 @@ module.exports = {
                 ],
             },
             {
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        mimetype: 'application/font-woff'
+                    }
+                }
+            },
+            {
+                test: /\.(ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                use: 'file-loader'
+            },
+            {
                 test: /\.svg$/,
                 use: ['@svgr/webpack'],
             },
