@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect, useHistory} from "react-router-dom";
 import CardHolder from "../Components/CardHolder/CardHolder";
+import WorkoutStatistic from "../Scenes/WorkoutStatistic";
 import CardDetails from "../Components/CardHolder/CardDetails";
 
 const RoutRouter = () => {
@@ -15,6 +16,9 @@ const RoutRouter = () => {
             <Route path={"/cards"}>
             <CardHolder/>
             </Route>
+                <Route path={"/statistic"}>
+                    <WorkoutStatistic/>
+                </Route>
             <Route exact path={"/"}>
                <div>
                    Привет!

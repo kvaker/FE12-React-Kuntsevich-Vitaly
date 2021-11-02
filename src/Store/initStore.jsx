@@ -8,6 +8,8 @@ import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import rootReducer from './reducers/rootReducer';
 import taskListReducer from "./reducers/taskListReducer"
 
+
+
 const newTaskList = [
     {
         taskName: 'Task 1',

@@ -9,12 +9,14 @@ import { cardListSelector } from "../../Store/selectors/cardsList";
 import { useDispatch, useSelector } from "react-redux";
 import { newCard, toTopCard, toBottomCard, deleteCard, doneCard, changeCard } from "../../Store/actions/cardsList";
 import {CARD_LIST_ACTIONS} from "../../Store/actionTypes";
+import CalendarDay from "/src/Components/CalendarDay";
 
 const StyledCardHolder = styled.div`
 display: flex;
 flex-wrap: nowrap;
 justify-content: center;
 align-items: flex-start;
+margin-left: 275px;
 
 .container-wrap-board{
   background-color: #E4E9F1;
@@ -185,6 +187,7 @@ const CardHolder = (props) => {
 
     return (
         <StyledCardHolder>
+            <CalendarDay/>
             <CardColumn title="To Do"
                         addTask={addTask}
                         taskStatus={TASK_STATUS.toDo}
