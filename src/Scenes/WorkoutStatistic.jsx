@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Route } from "/src/Routing/Rout";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Progress from "../Components/Progress";
+import RenderCustomAxisTick from "/src/Components/LineChart"
 
 const StyledWorkoutStatistic = styled.div`
    .StatisticBarChart {
@@ -76,7 +76,9 @@ return (
     {props.children}
     <section className={"StatisticBarChart"}>
     <div className={"Chart-Bar"}>
-    <div className={"Running-Bar"}></div>
+    <div className={"Running-Bar"}>
+        <RenderCustomAxisTick/>
+    </div>
     <div className={"Cycling-Bar"}></div>
     <div className={"Yoga-Bar"}></div>
     </div>
@@ -86,7 +88,6 @@ return (
     <div className={"Chart-Stat"}></div>
     </div>
     </section>
-    {/*<Progress/>*/}
 </StyledWorkoutStatistic>
 )
 }
