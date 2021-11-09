@@ -1,5 +1,5 @@
 import React, {useEffect, memo, useRef, useContext} from "react";
-import { ModalContext} from "../../HOC/GlobalModalProvider";
+import { ModalContext } from "../../HOC/GlobalModalProvider";
 import { getCardDetailsRoute } from "Routing/routes";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
@@ -7,7 +7,10 @@ import PenEditCard from '/src/Assets/img/pen-solid.svg';
 import img2 from '/src/Assets/img/User 01.png';
 import EditCard from "../ModalContent/EditCard";
 import { useDispatch } from "react-redux";
-import { toTopCard, toBottomCard, deleteCard, doneCard } from "/src/Store/actions/cardsList"
+import { toTopCard, toBottomCard, deleteCard, doneCard } from "/src/Store/actions/cardsList";
+import Runninginfo from "/src/Assets/img/running-solid.svg";
+import Cyclinginfo from "/src/Assets/img/biking-solid.svg";
+import Yogainfo from "/src/Assets/img/meditation-yoga.svg";
 
 const StyledCard = styled.div`
 .card-title{
@@ -59,6 +62,7 @@ const StyledCard = styled.div`
     position: relative;
     padding-bottom: 10px;
     margin-bottom: 16px;
+    border-radius: 10px;
 }
 .card-navi {
     display: flex;
@@ -94,7 +98,7 @@ const StyledCard = styled.div`
     text-align: center;
     color: #ffffff;
     border: 0em;
-    background-color: #DE1D3E;
+    background-color: orange;
     border-radius: 15px;
     margin-bottom: 8px;
     padding: 4px 8px;
@@ -112,24 +116,36 @@ const StyledCard = styled.div`
     flex-wrap: wrap;
 }
 .card-subtitle_version1{
-    font-size: 10px;
-    font-weight: 500;
+    width: 25px;
+    height: 25px;
     text-align: center;
     color: #ffffff;
     border: 0em;
-    background-color: #DE1D6E;
+    background-color: orange;
     border-radius: 4px;
     margin-bottom: 8px;
     margin-right: 8px;
     padding: 4px;
 }
 .card-subtitle_version2{
-    font-size: 10px;
-    font-weight: 500;
+    width: 25px;
+    height: 25px;
     text-align: center;
     color: #ffffff;
     border: 0em;
-    background-color: #4F1DDE;
+    background-color: #0075FF;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    padding: 4px;
+}
+.card-subtitle_version3{
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    color: #ffffff;
+    border: 0em;
+    background-color: #d30491;
     border-radius: 4px;
     margin-bottom: 8px;
     margin-right: 8px;
@@ -254,8 +270,9 @@ const Card = (props) => {
                       <p className="card-text">{props.taskDescription}</p>
                     <div className={"card-personal"}>
                       <div className="button-version">
-                        <button className="card-subtitle_version1">Mobile</button>
-                        <button className="card-subtitle_version2">Web</button>
+                        <button className="card-subtitle_version1"><Runninginfo/></button>
+                        <button className="card-subtitle_version2"><Cyclinginfo/></button>
+                        <button className="card-subtitle_version3"><Yogainfo/></button>
                       </div>
                     <span
                         className="subtitle-date">{props.taskName.finishDate === 0 ? '' : props.taskName.finishDate}</span>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Searchbutton from "/src/Assets/img/search-solid.svg"
@@ -7,13 +7,15 @@ import Commentbutton from "/src/Assets/img/comment-alt-regular.svg"
 import Gifttbutton from "/src/Assets/img/gift-solid.svg"
 import img2 from "../../Assets/img/User 01.png";
 import Registration from "/src/Components/Registration/Registration";
-import FormikInput from "/src/Components/FormikInputs/FormikInput"
+import FormikInput from "/src/Components/FormikInputs/FormikInput";
+import { ModalContext } from "/src/HOC/GlobalModalProvider";
+import WithPermission from "../../HOC/WithPermission";
 
 const StyledNavBarTop = styled.div `
     width: auto;
     height: 62px;
     color: #FFFFFF;
-    margin: 0 25px 20px;
+    margin: 0 25px 40px;
     position: relative;
     z-index: 0;
     
@@ -27,7 +29,7 @@ const StyledNavBarTop = styled.div `
     height: 45px;
     background: #F2EFF5;
     margin-top: 16px;
-    margin-right: 180px;
+    margin-right: 250px;
     border-radius: 16px;
     }
     .search-area: cursor {
@@ -73,6 +75,7 @@ const StyledNavBarTop = styled.div `
 `
 
 const NavBarTop = (props) => {
+    const setModalContent = useContext(ModalContext);
     return (
         <StyledNavBarTop>
             <div className={"navbartop-area"}>
@@ -88,10 +91,13 @@ const NavBarTop = (props) => {
                         <Commentbutton className={"info-button"}/> </div>
                     <div className={"info-button_background"} onClick={props.children}>
                         <Gifttbutton className={"info-button"}/></div>
+                        <WithPermission>
                         <div className="info-button_background"><img className="customers-content_icon" src={img2} alt="Jorge C"/>
                         </div>
-                        <div className={"info-button"} onClick={props.field}>
-                           Sign in  </div>
+                        </WithPermission>
+                        <div className={"info-button"} onClick={() => {
+                            setModalContent(<Registration/>);
+                        }}>Sign in  </div>
                 </div>
             </div>
                     <div className={"content"}>

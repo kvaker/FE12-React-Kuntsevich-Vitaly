@@ -9,6 +9,7 @@ const StiledSample = styled.div`
   border-radius: 8px;
   font-family: Montserrat, sans-serif;
   line-height: 1.125em;
+  margin-top: 20px;
 }
  .Sample .react-calendar--doubleView {
   width: 700px;

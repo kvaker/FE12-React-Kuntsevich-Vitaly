@@ -1,8 +1,8 @@
 import React, {useEffect, memo, useContext, useRef, useState} from "react";
 import styled from 'styled-components';
-import { ModalContext } from "../../HOC/GlobalModalProvider";
+import { ModalContext } from "/src/HOC/GlobalModalProvider";
 import { changeCard } from '/src/Store/actions/cardsList';
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
 const StyledEditCardModal = styled.div`
         .newtask-open {
@@ -20,7 +20,7 @@ const StyledEditCardModal = styled.div`
         
         .newtask-content {
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           justify-content: center;
           flex-wrap: wrap;
           background-color: rgb(211, 208, 208);
@@ -30,6 +30,38 @@ const StyledEditCardModal = styled.div`
           border-radius: 4px;
           position: relative;
         }
+        .form-row {
+    display: flex;
+    flex-direction: column;
+    margin: 0.2rem;
+}
+
+.form-row-label {
+    width: 15%;
+    padding: 0.2rem;
+    padding-right: 0.5rem;
+    border: 0.1rem solid black;
+    border-right: 0;
+    border-radius: 0.2rem 0rem 0rem 0.2rem;
+}
+
+.form-row-input {
+    border: 0.1rem solid black;
+    border-radius: 0rem 0.2rem 0.2rem 0rem;
+    width: 85%;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-row-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0.2rem;
+}
+
 `
 
 const EditCardModal = (props) => {

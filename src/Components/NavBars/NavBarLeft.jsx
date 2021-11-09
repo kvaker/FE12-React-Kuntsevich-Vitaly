@@ -17,15 +17,15 @@ const StyledNavBarLeft = styled.div `
   }
   
   .LogoDashboard {
-    width: 96px;
-    weight: 96px;
+    width: 76px;
+    weight: 76px;
     color: #0075FF;
     margin: 30px;
-    padding: 15px 45px;
+    padding: 15px 80px;
   }
   
   .navBar {
-    width: 260px;
+    width: 300px;
     height: 1100px;
     background: #FFFFFF;
     margin-right: 30px;

@@ -16,7 +16,7 @@ display: flex;
 flex-wrap: nowrap;
 justify-content: center;
 align-items: flex-start;
-margin-left: 275px;
+margin-left: 360px;
 
 .container-wrap-board{
   background-color: #E4E9F1;
@@ -30,6 +30,7 @@ margin-left: 275px;
   background-color: #F2EFF5;
     width: 298px;
     margin: 20px 15px;
+    border-radius: 10px;
     }
     .board-card__basic{
         width: 266px;

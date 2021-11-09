@@ -13,6 +13,7 @@ const StyledCardColumn = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     align-items: flex-start;
+    margin-right: 15px;
 }
 .board-card__item {
   background-color: #F2EFF5;

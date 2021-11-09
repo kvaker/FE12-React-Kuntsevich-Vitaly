@@ -6,3 +6,10 @@ export const CARD_LIST_ACTIONS = {
     done: 'move card to done',
     change: 'change cardName, cardDescription',
 };
+
+export const USER_ACTIONS = {
+    add: 'add user to list',
+    newUser: 'new user app',
+    delete: 'delete user from list',
+    change: 'change userName, userData',
+};
