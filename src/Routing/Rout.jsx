@@ -3,6 +3,7 @@ import { Switch, Route, Redirect, useHistory} from "react-router-dom";
 import CardHolder from "../Components/CardHolder/CardHolder";
 import WorkoutStatistic from "../Scenes/WorkoutStatistic";
 import CardDetails from "../Components/CardHolder/CardDetails";
+import DietFoodMenu from "../Scenes/DietFoodMenu";
 
 const RoutRouter = () => {
     const isUserLoggedIn = false;
@@ -18,6 +19,9 @@ const RoutRouter = () => {
             </Route>
                 <Route path={"/statistic"}>
                     <WorkoutStatistic/>
+                </Route>
+                <Route path={"/dietfoodmenu"}>
+                    <DietFoodMenu/>
                 </Route>
             <Route exact path={"/"}>
                <div>

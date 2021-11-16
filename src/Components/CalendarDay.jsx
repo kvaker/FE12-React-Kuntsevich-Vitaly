@@ -117,23 +117,32 @@ const StiledSample = styled.div`
 }
 `
 
+
 export default function Sample() {
     const [value, onChange] = useState(new Date());
-
-    return (
-        <StiledSample>
-        <div className="Sample">
-            <div className="Sample__container">
-                <main className="Sample__container__content">
-                    <Calendar
-                        onChange={onChange}
-                        showWeekNumbers
-                        value={value}
-                    />
-                </main>
-            </div>
-            <div className={"NextWeekPlan"}></div>
-        </div>
-        </StiledSample>
-    );
-}
+    const CalendarComponent  = (date) => {
+            const dateobj =
+                this.props.value &&
+                this.props.value.find((x) => {
+                    return (
+                        date.getDay() === new Date(x.start).getDay() &&
+                        date.getMonth() === new Date(x.start).getMonth() &&
+                        date.getDate() === new Date(x.start).getDate()
+                    );
+                });
+            return dateobj ? dateobj.color : "";
+        };
+        return (
+            <StiledSample>
+                <div className="Sample">
+                    <div className="Sample__container">
+                        <main className="Sample__container__content">
+                            <Calendar
+                                tileClassName={({ activeStartDate, date, value }) => new Date(date)}
+                            />
+                        </main>
+                    </div>
+                    <div className={"NextWeekPlan"}></div>
+                </div>
+            </StiledSample>
+        )};

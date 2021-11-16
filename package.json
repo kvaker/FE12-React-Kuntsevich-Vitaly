@@ -4,6 +4,7 @@
   "description": "TMS learning project",
   "main": "src/index.js",
   "dependencies": {
+    "axios": "^0.24.0",
     "chart.js": "^3.6.0",
     "formik": "^2.2.9",
     "react": "^17.0.2",

@@ -86,7 +86,7 @@ const NavBarLeft = (props) => {
                                 <Link className={"link-button"} to={"/cards"}> <LogoDistanceMap className={"icon-links"} />
                                     Distance Map
                                 </Link>
-                                <Link className={"link-button"} to={"/cards"}> <LogoDiet className={"icon-links"} />
+                                <Link className={"link-button"} to={"/dietfoodmenu"}> <LogoDiet className={"icon-links"} />
                                     Diet Food Menu
                                 </Link>
                                 <Link className={"link-button"} to={"/cards"}> <LogoPersonalStat className={"icon-links"} />
