@@ -8,15 +8,15 @@ background-color: #B8EBB0;
 `
 
 const Table = (props) => {
-    const [sortedData, setSortedData] = useState([]);
-    const [sort, setSort] = useState({columnKey: props.cells[0].key, sortDirection: 'asc'});
+    const [product, productSortedData] = useState([]);
+    const [sort, setSort] = useState({columnKey: 'columnName', sortDirection: 'asc'});
     const [filter, setFilter] = useState({});
     const [page, setPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(10);
 
     useEffect((() => {
-        APIGetTableData(page, filter, sort, itemsPerPage);
-    }), [page, filter, sort, itemsPerPage])
+        APIGetTableData(product, page, filter, sort, itemsPerPage);
+    }), [product, page, filter, sort, itemsPerPage])
 
     const handleFilter = (key) => (event) => {
         const newFilter = {...filter};

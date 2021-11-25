@@ -79,8 +79,8 @@ const Registration = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
-    const newUserAdd = (UserName, password, Birthday, City, email) => {
-        dispatch(newUserAdd(UserName, password, Birthday, City, email))
+    const newUserAdd = (UserName, password, Birthday, City, email, userID) => {
+        dispatch(newUserAdd(UserName, password, Birthday, City, email, userID))
     }
     return (
         <StyledRegistration>
@@ -90,11 +90,11 @@ const Registration = () => {
                         onSubmit={(formData) => {
                             console.log("form submitted", formData)
                             registerUser(formData.Name, formData.password, formData.Birthday, formData.City,
-                                formData.email)
+                                formData.email, formData.userID)
                                 .then(({data}) => {
                                     console.log(data);
                                     dispatch(newUserAdd(formData.Name, formData.password, formData.Birthday,
-                                        formData.City, formData.email));
+                                        formData.City, formData.email, formData.userID));
                                     history.push(PATHS.NEWS(data))
                                 })
                         }}

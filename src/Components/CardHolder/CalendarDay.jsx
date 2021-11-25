@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar'
 import styled from "styled-components";
+import { DateTime } from "luxon/build/es6/luxon";
 
 const StiledSample = styled.div`
 .Sample .react-calendar {
@@ -130,7 +131,11 @@ export default function Sample() {
                         date.getDate() === new Date(x.start).getDate()
                     );
                 });
-            return dateobj ? dateobj.color : "";
+            const eventDate = DateTime.fromFormat(x.start, 'DD.MM.YYYY');
+            const currentDate = DateTime.fromFormat(date, 'DD.MM.YYYY');
+            if (eventDate === currentDate)
+
+        return dateobj ? dateobj.color : "";
         };
         return (
             <StiledSample>
@@ -146,3 +151,16 @@ export default function Sample() {
                 </div>
             </StiledSample>
         )};
+
+// const eventDate = DateTime.fromFormat(x.start, 'DD.MM.YYYY');
+// const currentDate = DateTime.fromFormat(date, 'DD.MM.YYYY');
+// if (eventDate === currentDate){
+//     return date ? date.color : "";
+// }
+// };
+// const checkIsDateOccupied (date) => {
+//     cardList.foreach((card) => {
+//         if (card.date === date) return true
+//     })
+//     return false
+// }

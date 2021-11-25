@@ -12,4 +12,8 @@ export const USER_ACTIONS = {
     newUser: 'new user app',
     delete: 'delete user from list',
     change: 'change userName, userData',
+    logined: 'logined user',
+    logOut: 'log out user',
 };
+
+

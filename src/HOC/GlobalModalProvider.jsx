@@ -8,11 +8,11 @@ const GlobalModalProvider = (props) => {
 
     return (
         <React.Fragment>
+            <ModalContext.Provider value={setModalContent}>
             {modalContent &&
             <ModalWindow>
                 {modalContent}
             </ModalWindow>}
-            <ModalContext.Provider value={setModalContent}>
             {props.children}
         </ModalContext.Provider>
         </React.Fragment>

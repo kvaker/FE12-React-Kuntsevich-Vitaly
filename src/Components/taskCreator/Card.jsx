@@ -13,6 +13,8 @@ import Cyclinginfo from "/src/Assets/img/biking-solid.svg";
 import Yogainfo from "/src/Assets/img/meditation-yoga.svg";
 
 const StyledCard = styled.div`
+background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
+
 .card-title{
     border-radius: 4px;
     margin-bottom: 16px;
@@ -275,7 +277,7 @@ const Card = (props) => {
                         <button className="card-subtitle_version3"><Yogainfo/></button>
                       </div>
                     <span
-                        className="subtitle-date">{props.taskName.finishDate === 0 ? '' : props.taskName.finishDate}</span>
+                        className="subtitle-date">{props.taskName.Date === 0 ? '' : props.taskName.Date}</span>
                     <div className="icon-container">
                         <div className="customers-icon"><img className="customers-content_icon" src={img2} alt="Jorge C"/>
                         </div>

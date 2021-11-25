@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Route } from "/src/Routing/Rout";
@@ -7,10 +7,14 @@ import styled from "styled-components";
 import Dropdownbutton from "../Assets/img/caret-down-solid.svg";
 import Table from "../Components/Table";
 import { getFoodByName } from "/src/api/dietInstance"
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
+import Checkboxes from "../Components/FormikInputs/Checkboxes"
+import {ThemeContext} from "../HOC/GlobalThemeProvider";
 
 
 const StyledDietFoodMenu = styled.div`
+background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
+
 .DietFoodChart {
    margin-left: 360px;
    display: flex;
@@ -116,7 +120,8 @@ const DietFoodMenu = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
-    const [food, setFood] = useState(null);
+    const [hits, sethits] = useState(null);
+    const setIsThemeDark = useContext(ThemeContext);
 
     const tableCells = [
         {name: "column1", key: "c1", width:20, handleSort: (a,b) => +a > +b ? 1 : -1},
@@ -153,29 +158,64 @@ const DietFoodMenu = (props) => {
                                     <div className={"dropdown-button"} onClick={props.children}>
                                         <Dropdownbutton/>
                                     </div>
-                                    <div
-                                        initialValues={{
-                                            picked: '',
-                                        }}
-                                        onSubmit={(values) =>
-                                            getFoodByName(values.picked)
-                                                .then((data) => {
-                                                    setFood(data);
-                                                    history.push({ pathname: location.pathname,
-                                                        search: "?meal=" + new URLSearchParams(values.picked) });
-                                                })
-                                        }>
-                                    <Table/>
+                                    <Table cells={tableCells} data={tableData}/>
                             </div>
                         </div>
                         </div>
                     <div className={"Current-Diet-Bar"}>
+                        <Formik
+                            initialValues={{
+                                picked: '',
+                            }}
+                            onSubmit={(values) =>
+                                getFoodByName(values.picked)
+                                    .then((data) => {
+                                        getFoodByName(data);
+                                        history.push({ pathname: location.pathname, search: "?" +
+                                                new URLSearchParams(`hits=${values.picked}`) });
+                                    })
+                            }
+                        >
+                            {({ values }) => (
+                                <Form className="book-filter_form">
+                                    <div className="book-filter">
+                                        <p className="book-filter_p">
+                                            Food
+                                        </p>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipe/chicken/" />
+                                            <label htmlFor="classic">recipe</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="ingredients" />
+                                            <label htmlFor="classic">ingredients</label>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" className="book-filter_btn">Search</button>
+                                </Form>
+                            )}
+                        </Formik>
                     </div>
                     <div className={"Trending-Ingredients"}>
+                        <div className="bookcard-container">
+                            {hits && hits
+                                .slice(pagesVisited, pagesVisited + hitsPerPage)
+                                .map((hits, index) => {
+                                    const chicken = hits.recipe_name.join(", ");
+                                    const covers = () => {
+                                        let result = hits.recipe === undefined ? '1' : hits.recipe[0];
+                                        return result;
+                                    }
+                                    return (
+                                        <Bookcard key={index} title={hits.title} recipe={recipe} cover={covers} all={product} />
+                                    );
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
                 </div>
-                    </div>
                 </div>
             </section>
         </StyledDietFoodMenu>

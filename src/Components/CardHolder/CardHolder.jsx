@@ -9,9 +9,11 @@ import { cardListSelector } from "../../Store/selectors/cardsList";
 import { useDispatch, useSelector } from "react-redux";
 import { newCard, toTopCard, toBottomCard, deleteCard, doneCard, changeCard } from "../../Store/actions/cardsList";
 import {CARD_LIST_ACTIONS} from "../../Store/actionTypes";
-import CalendarDay from "/src/Components/CalendarDay";
+import CalendarDay from "/src/Components/CardHolder/CalendarDay";
+import {ThemeContext} from "../../HOC/GlobalThemeProvider";
 
 const StyledCardHolder = styled.div`
+background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
 display: flex;
 flex-wrap: nowrap;
 justify-content: center;
@@ -144,6 +146,7 @@ const CardHolder = (props) => {
     const [newTaskName, setNewTaskName] = useState('');
     const [newTaskDescription, setNewTaskDescription] = useState('');
     const setModalContent = useContext(ModalContext);
+    const setIsThemeDark = useContext(ThemeContext);
 
     useEffect(() => {
         console.log('use effect');

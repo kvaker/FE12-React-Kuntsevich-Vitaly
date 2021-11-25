@@ -8,7 +8,7 @@ import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import rootReducer from './reducers/rootReducer';
 import taskListReducer from "./reducers/taskListReducer"
 
-
+const newUser = [];
 
 const newTaskList = [
     {
@@ -31,7 +31,9 @@ const newTaskList = [
     },
 ];
 
-const initialState = {taskListReducer: {taskList: newTaskList}};
+const initialState = {
+    userReducer: {user: newUser},
+    taskListReducer: {taskList: newTaskList}};
 
 const persistConfig = {
     key: 'root',

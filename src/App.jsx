@@ -5,21 +5,25 @@ import GlobalModalProvider from "./HOC/GlobalModalProvider";
 import RoutRouter from "./Routing/Rout";
 import MainLayout from "./Layouts/MainLayout";
 import GlobalStoreProvider from "./HOC/GlobalStoreProvider";
+import GlobalThemeProvider from "./HOC/GlobalThemeProvider";
 import './styles/style.css'
+import {store} from "./Store/initStore";
 
 const App = (props) => {
     return (
         <React.Fragment>
             <BrowserRouter>
-                <GlobalStoreProvider>
-                    <GlobalModalProvider>
-                        <BrowserRouter>
-                            <MainLayout>
-                                <RoutRouter/>
-                            </MainLayout>
-                        </BrowserRouter>
-                    </GlobalModalProvider>
-                 </GlobalStoreProvider>
+                <GlobalThemeProvider store={store}>
+                    <GlobalStoreProvider>
+                        <GlobalModalProvider>
+                            <BrowserRouter>
+                                <MainLayout>
+                                    <RoutRouter/>
+                                </MainLayout>
+                            </BrowserRouter>
+                        </GlobalModalProvider>
+                    </GlobalStoreProvider>
+                </GlobalThemeProvider>
             </BrowserRouter>
         </React.Fragment>
     )

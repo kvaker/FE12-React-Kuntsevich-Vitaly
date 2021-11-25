@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import { useDispatch } from "react-redux";
 import { Route } from "/src/Routing/Rout";
 import { Link } from "react-router-dom";
@@ -10,8 +10,11 @@ import Runninginfo from "../Assets/img/running-solid.svg";
 import Cyclinginfo from "../Assets/img/biking-solid.svg";
 import Yogainfo from "../Assets/img/meditation-yoga.svg";
 import Dropdownbutton from "../Assets/img/caret-down-solid.svg";
+import {ThemeContext} from "../HOC/GlobalThemeProvider";
 
 const StyledWorkoutStatistic = styled.div`
+   background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
+   
    .StatisticBarChart {
    margin-left: 360px;
    display: flex;
@@ -178,6 +181,7 @@ const StyledWorkoutStatistic = styled.div`
 
 const WorkoutStatistic = (props) => {
     const dispatch = useDispatch();
+    const setIsThemeDark = useContext(ThemeContext);
 
 return (
 <StyledWorkoutStatistic>

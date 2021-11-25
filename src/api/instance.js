@@ -1,8 +1,14 @@
 import axios from "axios";
 
 
-const remooteLibraryInstance = axios.create({
-    baseURL: 'https://wger.de/api/v2/',
+const remooteDietInstance = axios.create({
+    method: 'GET',
+    url: 'https://edamam-recipe-search.p.rapidapi.com/search',
+    params: {q: ''},
+    headers: {
+        'x-rapidapi-host': 'edamam-recipe-search.p.rapidapi.com',
+        'x-rapidapi-key': '976e8b03fdmshb235b038b5da19ap18d4afjsnb4489a711590'
+    }
 });
 
 export const registerUser = (Name, password, Birthday, City, email, userID) => {
@@ -18,7 +24,7 @@ export const registerUser = (Name, password, Birthday, City, email, userID) => {
     })
 };
 
-export const APIGetTableData = (page, filter, sort, itemsPerPage) => {
-    remooteLibraryInstance.get("https://wger.de/api/v2/", {params: {page, filter, itemsPerPage,
+export const APIGetTableData = (hits, page, filter, sort, itemsPerPage) => {
+    remooteDietInstance.get("/", {params: {hits, page, filter, itemsPerPage,
             sortDirection: sort.sortDirection, sortColumn: sort.sortColumn}});
 };
