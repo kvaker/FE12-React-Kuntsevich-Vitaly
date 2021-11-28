@@ -16,4 +16,6 @@ export const USER_ACTIONS = {
     logOut: 'log out user',
 };
 
-
+export const FOOD_ACTIONS = {
+    addFood: 'add food in menu',
+};

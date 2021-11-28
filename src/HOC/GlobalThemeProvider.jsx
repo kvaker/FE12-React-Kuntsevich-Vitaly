@@ -6,6 +6,7 @@ import {
     StyleSheetManager,
 } from "styled-components";
 
+import { darkTheme } from "/src/Constants/themesStyle"
 
 const GlobalStyles = createGlobalStyle`
 @font-face {
@@ -303,8 +304,7 @@ template {
     display: none;
 }
 body {
-    background-color: ;
-    background-color: ${props => props.children === 1 ? props.theme.BackgroundColor : "#E4E9F1"};
+   background-color: ${props => props.children === 1 ? props.theme.BackgroundColor : "#E4E9F1"};
 }
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
@@ -365,7 +365,7 @@ export const ThemeContext = React.createContext('');
 const GlobalThemeProvider = (props) => {
     const [isThemeDark, setIsThemeDark] = useState(false);
     const globalStyle = {BackgroundColor: "#3f4342"};
-    const darkGlobalStyle = {innerBackgroundColor: "black"}
+    const darkGlobalStyle = {darkTheme}
 
     return (
         <StyleSheetManager disableVendorPrefixes={true}>

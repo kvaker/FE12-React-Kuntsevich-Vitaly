@@ -12,10 +12,11 @@ import { ModalContext } from "/src/HOC/GlobalModalProvider";
 import WithPermission from "../../HOC/WithPermission";
 
 const StyledNavBarTop = styled.div `
-    width: auto;
+background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
+    width: 1460px;
     height: 62px;
     color: #FFFFFF;
-    margin: 0 25px 40px;
+    margin: 0 360px 40px;
     position: relative;
     z-index: 0;
     
@@ -25,7 +26,7 @@ const StyledNavBarTop = styled.div `
      justify-content: flex-end;
     }
     .search-area {
-    width: 400px;
+    width: 450px;
     height: 45px;
     background: #F2EFF5;
     margin-top: 16px;
@@ -42,7 +43,7 @@ const StyledNavBarTop = styled.div `
     height: 18px;
     color: #86878B;
     text-align: center;
-    margin: 8px 350px;
+    margin: 8px 390px;
     padding: 4px 16px;
     transition: 0.5s;
     cursor: pointer;

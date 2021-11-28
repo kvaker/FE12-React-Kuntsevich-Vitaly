@@ -13,9 +13,10 @@ import Dropdownbutton from "../Assets/img/caret-down-solid.svg";
 import {ThemeContext} from "../HOC/GlobalThemeProvider";
 
 const StyledWorkoutStatistic = styled.div`
-   background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
+   background: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
    
    .StatisticBarChart {
+   background-color: ${props => props.theme.componentBackgroundColor};
    margin-left: 360px;
    display: flex;
    flex-direction: row;

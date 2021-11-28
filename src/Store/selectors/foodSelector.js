@@ -1,0 +1,1 @@
+export const foodSelector = store => store.foodReducer.foodList;

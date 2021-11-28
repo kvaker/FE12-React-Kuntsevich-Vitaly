@@ -24,7 +24,8 @@ export const registerUser = (Name, password, Birthday, City, email, userID) => {
     })
 };
 
-export const APIGetTableData = (hits, page, filter, sort, itemsPerPage) => {
-    remooteDietInstance.get("/", {params: {hits, page, filter, itemsPerPage,
+export const APIGetTableData = (dietLabels, healtLabels, totalNutrients,
+filter, sort, itemsPerPage) => {
+    remooteDietInstance.get("/", {params: {dietLabels, healtLabels, totalNutrients, filter, itemsPerPage,
             sortDirection: sort.sortDirection, sortColumn: sort.sortColumn}});
 };

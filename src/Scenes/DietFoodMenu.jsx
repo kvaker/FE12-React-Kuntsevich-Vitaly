@@ -1,15 +1,18 @@
 import React, {useContext, useState} from "react";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { Route } from "/src/Routing/Rout";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import ReactPaginate from "react-paginate";
 import Dropdownbutton from "../Assets/img/caret-down-solid.svg";
 import Table from "../Components/Table";
-import { getFoodByName } from "/src/api/dietInstance"
+import FoodCard from "../Components/DietFoodmenu/FoodCard";
+import { getFoodByName } from "/src/api/dietInstance";
+import { newFoodAdd } from "../Store/actions/foodActions";
 import { Form, Formik } from "formik";
 import Checkboxes from "../Components/FormikInputs/Checkboxes"
 import {ThemeContext} from "../HOC/GlobalThemeProvider";
+import {foodSelector} from "../Store/selectors/foodSelector";
 
 
 const StyledDietFoodMenu = styled.div`
@@ -120,20 +123,28 @@ const DietFoodMenu = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();
-    const [hits, sethits] = useState(null);
+    const [pageNumber, setpageNumber] = useState(null);
     const setIsThemeDark = useContext(ThemeContext);
+    const foodsPerPage = 15;
+    const pagesVisited = pageNumber * foodsPerPage;
+    const foodList = useSelector(foodSelector);
+
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+    };
 
     const tableCells = [
-        {name: "column1", key: "c1", width:20, handleSort: (a,b) => +a > +b ? 1 : -1},
-        {name: "column2", key: "c2", width:80}
+        {name: "column1", key: "dietLabels", width:20, handleSort: (a,b) => +a > +b ? 1 : -1},
+        {name: "column2", key: "healtLabels", width:20},
+        {name: "column3", key: "totalNutrients", width:60}
     ]
     const tableData = [
-        {c1: '1', c2:'big Cell'},
-        {c1: '2', c2:'big Cell'},
-        {c1: '3', c2:'big Cell'},
-        {c1: '4', c2:'big Cell'},
-        {c1: '5', c2:'big Cell'},
-        {c1: '6', c2:'big Cell'},
+        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
+        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
+        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
+        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
+        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
+        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
         {c1: '7', c2:'big Cell'},
         {c1: '8', c2:'big Cell'},
         {c1: '9', c2:'big Cell'},
@@ -158,7 +169,6 @@ const DietFoodMenu = (props) => {
                                     <div className={"dropdown-button"} onClick={props.children}>
                                         <Dropdownbutton/>
                                     </div>
-                                    <Table cells={tableCells} data={tableData}/>
                             </div>
                         </div>
                         </div>
@@ -170,16 +180,16 @@ const DietFoodMenu = (props) => {
                             onSubmit={(values) =>
                                 getFoodByName(values.picked)
                                     .then((data) => {
-                                        getFoodByName(data);
+                                        dispatch(newFoodAdd(data));
                                         history.push({ pathname: location.pathname, search: "?" +
                                                 new URLSearchParams(`hits=${values.picked}`) });
                                     })
                             }
                         >
                             {({ values }) => (
-                                <Form className="book-filter_form">
-                                    <div className="book-filter">
-                                        <p className="book-filter_p">
+                                <Form className="food-filter_form">
+                                    <div className="food-filter">
+                                        <p className="food-filter_p">
                                             Food
                                         </p>
                                         <div>
@@ -192,32 +202,50 @@ const DietFoodMenu = (props) => {
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="book-filter_btn">Search</button>
+                                    <button type="submit" className="food-filter_btn">Search</button>
                                 </Form>
                             )}
                         </Formik>
                     </div>
                     <div className={"Trending-Ingredients"}>
-                        <div className="bookcard-container">
-                            {hits && hits
-                                .slice(pagesVisited, pagesVisited + hitsPerPage)
-                                .map((hits, index) => {
-                                    const chicken = hits.recipe_name.join(", ");
+                        <div className="foodcard-container">
+                            {foodList
+                                .slice(pagesVisited, pagesVisited + foodsPerPage)
+                                .map((food) => {
+                                    const chicken = food.recipe_name.join(", ");
                                     const covers = () => {
-                                        let result = hits.recipe === undefined ? '1' : hits.recipe[0];
+                                        let result = food.recipe === undefined ? '1' : food.recipe[0];
                                         return result;
                                     }
                                     return (
-                                        <Bookcard key={index} title={hits.title} recipe={recipe} cover={covers} all={product} />
+                                        <FoodCard key={index} title={food.title} recipe={recipe}
+                                dietLabels={dietLabels} healtLabels={healtLabels} totalNutrients={totalNutrients}
+                                                  cover={covers} all={food}/>
                                     );
                                 })
                             }
                         </div>
+                        <Table cells={tableCells} data={tableData}/>
                     </div>
                 </div>
                 </div>
                 </div>
             </section>
+            {foodList.length !== 0 &&
+            <ReactPaginate
+                previousLabel="< "
+                nextLabel=" >"
+                pageCount={Math.ceil(100 / foodsPerPage)}
+                onPageChange={changePage}
+                containerClassName={"paginationBttns"}
+                previousLinkClassName={"previousBttn"}
+                nextLinkClassName={"nextBttn"}
+                disabledClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+                pageClassName={"paginationAll"}
+            />
+            }
+
         </StyledDietFoodMenu>
     )
 }

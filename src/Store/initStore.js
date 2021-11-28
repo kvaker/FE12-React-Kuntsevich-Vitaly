@@ -9,6 +9,7 @@ import rootReducer from './reducers/rootReducer';
 import taskListReducer from "./reducers/taskListReducer"
 
 const newUser = [];
+const newFoodList = [];
 
 const newTaskList = [
     {
@@ -33,7 +34,8 @@ const newTaskList = [
 
 const initialState = {
     userReducer: {user: newUser},
-    taskListReducer: {taskList: newTaskList}};
+    taskListReducer: {taskList: newTaskList},
+    foodReducer: {foodList: newFoodList}};
 
 const persistConfig = {
     key: 'root',
