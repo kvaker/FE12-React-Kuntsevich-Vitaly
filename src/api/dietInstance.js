@@ -18,9 +18,9 @@ export const getFoodByName = (searchQuery) => {
         remooteDietInstance.get(`/search`, {params:
                 {q: searchQuery}})
             .then((response) => {
-                const data = response.data.docs;
-                if (!data) rej()
-                res(data)
+                const { hits } = response.data;
+                if (!hits) rej()
+                res(hits)
             })
     })
 };

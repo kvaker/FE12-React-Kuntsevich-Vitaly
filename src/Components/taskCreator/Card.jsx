@@ -11,6 +11,7 @@ import { toTopCard, toBottomCard, deleteCard, doneCard } from "/src/Store/action
 import Runninginfo from "/src/Assets/img/running-solid.svg";
 import Cyclinginfo from "/src/Assets/img/biking-solid.svg";
 import Yogainfo from "/src/Assets/img/meditation-yoga.svg";
+import Sample from "../CardHolder/CalendarDay";
 
 const StyledCard = styled.div`
 background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};

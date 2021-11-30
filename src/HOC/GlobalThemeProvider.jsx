@@ -1,12 +1,12 @@
 import React, { memo, useState } from "react";
-
+import { darkTheme } from "/src/Constants/themesStyle";
 import {
     ThemeProvider,
     createGlobalStyle,
     StyleSheetManager,
 } from "styled-components";
 
-import { darkTheme } from "/src/Constants/themesStyle"
+
 
 const GlobalStyles = createGlobalStyle`
 @font-face {
@@ -304,7 +304,8 @@ template {
     display: none;
 }
 body {
-   background-color: ${props => props.children === 1 ? props.theme.BackgroundColor : "#E4E9F1"};
+   background-color: #E4E9F1;
+   background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
 }
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
@@ -365,11 +366,11 @@ export const ThemeContext = React.createContext('');
 const GlobalThemeProvider = (props) => {
     const [isThemeDark, setIsThemeDark] = useState(false);
     const globalStyle = {BackgroundColor: "#3f4342"};
-    const darkGlobalStyle = {darkTheme}
+    const darkTheme = {darkTheme}
 
     return (
         <StyleSheetManager disableVendorPrefixes={true}>
-            <ThemeProvider theme={isThemeDark ? darkGlobalStyle : globalStyle}>
+            <ThemeProvider theme={isThemeDark ? darkTheme : globalStyle}>
                 <ThemeContext.Provider value={setIsThemeDark}>
                     <GlobalStyles/>
                     {props.children}

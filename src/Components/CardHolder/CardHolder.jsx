@@ -22,6 +22,7 @@ margin-left: 360px;
 
 .container-wrap-board{
   background-color: #E4E9F1;
+  background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -29,7 +30,7 @@ margin-left: 360px;
     align-items: flex-start;
 }
 .board-card__item {
-  background-color: #F2EFF5;
+  background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
     width: 298px;
     margin: 20px 15px;
     border-radius: 10px;

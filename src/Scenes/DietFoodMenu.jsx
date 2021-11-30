@@ -47,7 +47,7 @@ background-color: ${props => props.children === 1 ? "dark" : props.theme.Backgro
    justify-content: flex-start;
    justify-items: center;
    padding-top: 25px;
-   margin-right: 690px;
+   margin-right: 200px;
    }
    .dropdown-area {
     display: flex;
@@ -81,7 +81,7 @@ background-color: ${props => props.children === 1 ? "dark" : props.theme.Backgro
     color: #86878B;
     }
    .DietFood-Bar{
-   width: 1100px;
+   width: 900px;
    height: 900px;
    background: #ffffff;
    border-radius: 8px;
@@ -105,16 +105,51 @@ background-color: ${props => props.children === 1 ? "dark" : props.theme.Backgro
     margin: 20px 30px 30px;
     }
    .Current-Diet-Bar{
-   width: 330px;
+   width: 170px;
    height: 300px;
    background: #ffffff;
    border-radius: 8px;
    margin-bottom: 30px;
+   margin-right: 30px;
    }
+     .foodholder-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .foodcard-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+   .food-filter_form {
+   margin: 20px 30px 30px;
+   }
+     .paginationBttns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+  .previousBttn, .nextBttn, .paginationDisabled, .paginationActive, .paginationAll {
+    margin-right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #6E7064;
+  }
+
+  .paginationActive {
+    font-size: 20px;
+    color: #212020;
+  }
    .Trending-Ingredients{
-   width: 330px;
-   height: 600px;
-   background: #ffffff;
+   width: 1238px;
+   height: 1000px;
+   background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
    border-radius: 8px;
    }
 `
@@ -133,23 +168,24 @@ const DietFoodMenu = (props) => {
         setPageNumber(selected);
     };
 
-    const tableCells = [
-        {name: "column1", key: "dietLabels", width:20, handleSort: (a,b) => +a > +b ? 1 : -1},
-        {name: "column2", key: "healtLabels", width:20},
-        {name: "column3", key: "totalNutrients", width:60}
-    ]
-    const tableData = [
-        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
-        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
-        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
-        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
-        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
-        {dietLabels: 'dietLabels', healtLabels:'', totalNutrients: ''},
-        {c1: '7', c2:'big Cell'},
-        {c1: '8', c2:'big Cell'},
-        {c1: '9', c2:'big Cell'},
-        {c1: '10', c2:'big Cell'},
-    ]
+    // const tableCells = [
+    //     {name: "column1", key: "image", width:20, handleSort: (a,b) => +a > +b ? 1 : -1},
+    //     {name: "column2", key: "dietLabels", width:20},
+    //     {name: "column3", key: "healthLabels", width:20},
+    //     {name: "column4", key: "totalNutrients", width:40}
+    // ]
+    // const tableData = [
+    //     {dietLabels: 'dietLabels', healthLabels:'', totalNutrients: ''},
+    //     {dietLabels: 'dietLabels', healthLabels:'', totalNutrients: ''},
+    //     {dietLabels: 'dietLabels', healthLabels:'', totalNutrients: ''},
+    //     {dietLabels: 'dietLabels', healthLabels:'', totalNutrients: ''},
+    //     {dietLabels: 'dietLabels', healthLabels:'', totalNutrients: ''},
+    //     {dietLabels: 'dietLabels', healthLabels:'', totalNutrients: ''},
+    //     {c1: '7', c2:'big Cell'},
+    //     {c1: '8', c2:'big Cell'},
+    //     {c1: '9', c2:'big Cell'},
+    //     {c1: '10', c2:'big Cell'},
+    // ]
 
     return (
         <StyledDietFoodMenu>
@@ -190,15 +226,55 @@ const DietFoodMenu = (props) => {
                                 <Form className="food-filter_form">
                                     <div className="food-filter">
                                         <p className="food-filter_p">
-                                            Food
+                                            Diet
                                         </p>
                                         <div>
-                                            <Checkboxes name="picked" value="recipe/chicken/" />
-                                            <label htmlFor="classic">recipe</label>
+                                            <Checkboxes name="picked" value="recipes/Vegetarian" />
+                                            <label htmlFor="classic">Vegetarian</label>
                                         </div>
                                         <div>
-                                            <Checkboxes name="picked" value="ingredients" />
-                                            <label htmlFor="classic">ingredients</label>
+                                            <Checkboxes name="picked" value="recipes/Vegan" />
+                                            <label htmlFor="classic">Vegan</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/Paleo" />
+                                            <label htmlFor="classic">Paleo</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/High-Fiber" />
+                                            <label htmlFor="classic">High-Fiber</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/High-Protein" />
+                                            <label htmlFor="classic">High-Protein</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/Low-Carb" />
+                                            <label htmlFor="classic">Low-Carb</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/Low-Fat" />
+                                            <label htmlFor="classic">Low-Fat</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/Low-Sodium" />
+                                            <label htmlFor="classic">Low-Sodium</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/Low-Sugar" />
+                                            <label htmlFor="classic">Low-Sugar</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/Alcohol-Free" />
+                                            <label htmlFor="classic">Alcohol-Free</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/Balanced" />
+                                            <label htmlFor="classic">Balanced</label>
+                                        </div>
+                                        <div>
+                                            <Checkboxes name="picked" value="recipes/Immunity" />
+                                            <label htmlFor="classic">Immunity</label>
                                         </div>
                                     </div>
 
@@ -208,44 +284,53 @@ const DietFoodMenu = (props) => {
                         </Formik>
                     </div>
                     <div className={"Trending-Ingredients"}>
+                        <div className={"paginationBttns"}>
+                            {foodList.length !== 0 &&
+                            <ReactPaginate
+                                previousLabel="< "
+                                nextLabel=" >"
+                                pageCount={Math.ceil(100 / foodsPerPage)}
+                                onPageChange={changePage}
+                                containerClassName={"paginationBttns"}
+                                previousLinkClassName={"previousBttn"}
+                                nextLinkClassName={"nextBttn"}
+                                disabledClassName={"paginationDisabled"}
+                                activeClassName={"paginationActive"}
+                                pageClassName={"paginationAll"}
+                            />
+                            }
+                        </div>
                         <div className="foodcard-container">
                             {foodList
                                 .slice(pagesVisited, pagesVisited + foodsPerPage)
-                                .map((food) => {
-                                    const chicken = food.recipe_name.join(", ");
+                                .map((food, index) => {
+                                    // always use console log to check data;
+                                    console.log(food.recipe, 'food')
                                     const covers = () => {
                                         let result = food.recipe === undefined ? '1' : food.recipe[0];
                                         return result;
                                     }
                                     return (
-                                        <FoodCard key={index} title={food.title} recipe={recipe}
-                                dietLabels={dietLabels} healtLabels={healtLabels} totalNutrients={totalNutrients}
-                                                  cover={covers} all={food}/>
+                                        <FoodCard
+                                            key={index}
+                                            title={food.recipe.label}
+                                            recipe={food.recipe}
+                                            dietLabels={food.recipe.dietLabels[0]}
+                                            healtLabels={food.recipe.calories}
+                                            totalNutrients={food.recipe.totalNutrients}
+                                            image={food.recipe.image}
+                                            all={food}
+                                        />
                                     );
                                 })
                             }
                         </div>
-                        <Table cells={tableCells} data={tableData}/>
+                        {/*<Table cells={tableCells} data={tableData}/>*/}
                     </div>
-                </div>
+                        </div>
                 </div>
                 </div>
             </section>
-            {foodList.length !== 0 &&
-            <ReactPaginate
-                previousLabel="< "
-                nextLabel=" >"
-                pageCount={Math.ceil(100 / foodsPerPage)}
-                onPageChange={changePage}
-                containerClassName={"paginationBttns"}
-                previousLinkClassName={"previousBttn"}
-                nextLinkClassName={"nextBttn"}
-                disabledClassName={"paginationDisabled"}
-                activeClassName={"paginationActive"}
-                pageClassName={"paginationAll"}
-            />
-            }
-
         </StyledDietFoodMenu>
     )
 }

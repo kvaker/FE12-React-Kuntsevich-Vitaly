@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { Route } from "/src/Routing/Rout";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -11,6 +11,9 @@ import Cyclinginfo from "../Assets/img/biking-solid.svg";
 import Yogainfo from "../Assets/img/meditation-yoga.svg";
 import Dropdownbutton from "../Assets/img/caret-down-solid.svg";
 import {ThemeContext} from "../HOC/GlobalThemeProvider";
+import {userSelector} from "../Store/actions/user";
+import img2 from '/src/Assets/img/User 01.png';
+import UserList from "../Components/Users/UserList";
 
 const StyledWorkoutStatistic = styled.div`
    background: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
@@ -54,6 +57,7 @@ const StyledWorkoutStatistic = styled.div`
     width: 100px;
     height: 45px;
     background: #ffffff;
+    background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
     border: #F2EFF5 solid 2px;
     margin-top: 16px;
     border-radius: 16px;
@@ -82,6 +86,7 @@ const StyledWorkoutStatistic = styled.div`
    width: 1100px;
    height: 300px;
    background: #ffffff;
+   background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
    border-radius: 8px;
    margin-bottom: 30px;
    }
@@ -106,6 +111,7 @@ const StyledWorkoutStatistic = styled.div`
    width: 1100px;
    height: 300px;
    background: #ffffff;
+   background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
    border-radius: 8px;
    margin-bottom: 30px;
    }
@@ -130,6 +136,7 @@ const StyledWorkoutStatistic = styled.div`
    width: 1100px;
    height: 300px;
    background: #ffffff;
+   background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
    border-radius: 8px;
    margin-bottom: 30px;
    }
@@ -169,6 +176,7 @@ const StyledWorkoutStatistic = styled.div`
    width: 330px;
    height: 400px;
    background: #ffffff;
+   background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
    border-radius: 8px;
    margin-bottom: 30px;
    }
@@ -176,6 +184,7 @@ const StyledWorkoutStatistic = styled.div`
    width: 330px;
    height: 300px;
    background: #ffffff;
+   background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
    border-radius: 8px;
    }
 `
@@ -183,6 +192,7 @@ const StyledWorkoutStatistic = styled.div`
 const WorkoutStatistic = (props) => {
     const dispatch = useDispatch();
     const setIsThemeDark = useContext(ThemeContext);
+    const user = useSelector(userSelector);
 
 return (
 <StyledWorkoutStatistic>
@@ -247,6 +257,11 @@ return (
     <div className={"Chart-Progress"}>
     <div className={"Button-AddMoreTraining"}>+Add more training</div>
     <div className={"Progress-Bar"}>
+        <UserList Name={user.Name}
+                  FirstName={user.FirstName}
+                  City={user.City}
+                  Birthday={user.Birthday}
+                  userId={user.userID} />
     </div>
     <div className={"Chart-Stat"}></div>
     </div>

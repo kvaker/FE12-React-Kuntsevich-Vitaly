@@ -35,8 +35,9 @@ const StyledNavBarLeft = styled.div `
   
   .navBar {
     width: 300px;
-    height: 1100px;
+    height: 1180px;
     background: #FFFFFF;
+    background-color: ${props => props.children === 1 ? "dark" : props.theme.BackgroundColor};
     margin-right: 30px;
     box-shadow: 0 2px 28px rgba(0, 0, 0, 0.1);
 }
@@ -146,7 +147,7 @@ const NavBarLeft = (props) => {
                                 <DarkThemeButton className={"icon-links"} />
                                 </div>
                                 <div className={"footer"}>
-                                    Footer
+
                                 </div>
                             </div>
                         </div>

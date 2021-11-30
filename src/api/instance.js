@@ -17,15 +17,17 @@ export const registerUser = (Name, password, Birthday, City, email, userID) => {
         if (!usersList) {
             usersList = [];
         }
-        usersList.push({Name, password, Birthday, City, email, userID});
+        const userId = Math.floor((Math.random() * 1000) + 1);
+        const loginned = true;
+        usersList.push({Name, password, Birthday, City, email, userID, loginned});
         console.log(usersList);
         window.localStorage.setItem('registeredUsersList', JSON.stringify(usersList));
-        res({data: usersList});
+        res({dataId: userId,  dataLogged: loginned});
     })
 };
 
-export const APIGetTableData = (dietLabels, healtLabels, totalNutrients,
+export const APIGetTableData = (dietLabels, calories, totalNutrients,
 filter, sort, itemsPerPage) => {
-    remooteDietInstance.get("/", {params: {dietLabels, healtLabels, totalNutrients, filter, itemsPerPage,
+    remooteDietInstance.get("/", {params: {dietLabels, calories, totalNutrients, filter, itemsPerPage,
             sortDirection: sort.sortDirection, sortColumn: sort.sortColumn}});
 };
