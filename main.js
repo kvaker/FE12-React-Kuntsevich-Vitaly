@@ -101847,7 +101847,7 @@ function toString(value) {
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "/TMS_FE12/";
+/******/ 		__webpack_require__.p = "/FE12-React-Kuntsevich-Vitaly/";
 /******/ 	})();
 /******/ 	
 /************************************************************************/
