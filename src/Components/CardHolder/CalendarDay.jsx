@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar'
 import styled from "styled-components";
-import { DateTime } from "luxon/build/es6/luxon";
+import { DateTime } from "luxon";
 
 const StiledSample = styled.div`
 .Sample .react-calendar {
